@@ -504,5 +504,184 @@ $$y_1 | y_2 \sim N(\mu_1 + \rho \frac{\sigma_1}{\sigma_2}(y_2 - \mu_2), \sigma_1
 \end{frame}
 
 
+\begin{frame}[c]\frametitle{Has My MCMC Chain Converged?}
+    
+Properties of MCMC realy on limit arguments.  
+
+\Skip
+The more complicated the chain, the harder it is to make sure you have ``converged.''    
+
+
+\Skip
+Some rules of thumb:
+\begin{itemize}
+  \item Use a ``burn-in'' period. 
+  \item Plot time series of draws to make sure there is no trend. 
+  \item Run chain from several start points. 
+  \item Compare distributions from different subsamples of the chain. 
+  \item Compute the autocorellation function: 
+$$s_{\theta_i}(k) = \frac{ \sum_{r = k+1}^R (\theta_r - \bar{\theta})(\theta_{r-k} - \bar{\theta})}{ \sum_{r=1}^R  (\theta_r - \bar{\theta})^2} $$
+To make sure correlation is dying as time between draws increases. 
+\end{itemize}    
+
+
+\end{frame}
+
+
+\begin{frame}[c]\frametitle{Has My MCMC Chain Converged? Maybe. }
+    
+Sadly, there is no proof of convergence in an empirical application. 
+
+\Skip
+Similar to finding a global optimizer in frequentist approaches. 
+
+
+\Skip
+MCMC/Bayesian is not a free lunch. 
+
+\end{frame}
+
+
+\begin{frame}[c]\frametitle{Metropolis Algorithm I}
+    
+\begin{itemize}
+  \item Gibbs sampling relies on being abble to draw from \emph{conditional} distributions.
+  \item Idea from importance sampling (which we did not go over...)
+  \begin{itemize}
+     \item Draw from a known distribution and re-weight. 
+   \end{itemize} 
+\end{itemize}
+
+\Skip
+The Metropolis Algorithm constructs a sequence $\{\theta^{(n)}, n=1,2,... \}$ whose distributions converge to the target posterior. 
+
+
+\end{frame}
+
+
+
+\begin{frame}[c]\frametitle{Metropolis Algorithm II}
+    
+\begin{enumerate}
+  \item Draw starting point $\theta^{(0)}$ from an initial approximation to the posterior for which  $p(\theta^{(0)})>0$ 
+  \begin{itemize}
+    \item Ex.: multivariate t-dist centered on mode of marginal posterior distribution.
+  \end{itemize}
+  \item Set $n=1$. Draw $\theta*$ from a \emph{symmetric} \textbf{jumping distribution}, $J_1(\theta^{(1)} \mid \theta^{(0)})$. 
+  \begin{itemize}
+    \item Ex: $\theta^{(1)} \mid \theta^{(0)}\sim \mathcal{N}(\theta^{(0)}, V)$ for a fixed V. 
+  \end{itemize}
+  \item Calculate ratio of densities: $r = p(\theta^*)/p(\theta^{(0)})$.
+  \item Set $$\theta^{(1)} = \begin{cases} \theta^* \text{with prob.}\,\, \min(r,1) \\
+          \theta^{(0)} \text{with prob.}\,\,\ (1-\min(r,1)) \end{cases}$$
+          so the draw $\theta^{(1)}$ is a draw from a mixture distribution. 
+  \item Return to step 2.
+  \item Stop after many iterations. 
+
+\end{enumerate}
+
+\end{frame}
+
+
+\begin{frame}[c]\frametitle{Metropolis Algorithm III}
+    
+This is \emph{just} a way to increase $p(\theta)$ iteratively. 
+
+\Skip
+\begin{enumerate}
+  \item Start with a guess. 
+  \item Update guess if 
+  \begin{enumerate}
+    \item always if likelihood ($p()$) increases or  
+    \item with some probability if likelihood decreases. 
+  \end{enumerate}
+\end{enumerate}
+
+\Skip
+\textbf{Metropolis-Hastings}
+
+\Skip
+A refinement that uses a specific \textbf{jumping distribution} that is non-symmetric and therefore leads to more frequent transitions. 
+
+
+\end{frame}
+
+
+
+% \begin{frame}[c]\frametitle{Metropolis-Hastings Algorithm}
+    
+% \begin{itemize}
+%   \item Gibbs sampling relies on being able to draw from \emph{conditional} distributions.
+%   \item Idea from importance sampling (which we did not go over...)
+%   \begin{itemize}
+%      \item Draw from a known distribution and re-weight. 
+%    \end{itemize} 
+% \end{itemize}
+
+% \Skip
+% For simplicity, let's again do everything with discrete states. 
+
+% \Skip
+% Suppose we want to draw from $\pi$. But we only know how to draw from some candidate distribution $q_i$ (a known density that is potentially conditional on current state). 
+% That is: 
+% $$q_{ij} = Pr( \theta^{(j)} | \theta^{(i)})$$ 
+
+% \end{frame}
+
+
+% \begin{frame}[c]\frametitle{Metropolis-Hastings Algorithm}
+
+% The MH algorithm generates a Time-Reversible Markov chain with respect to $\pi$ by following: 
+% \begin{enumerate}
+% \item Initialize $\theta_0$ to some initial state. 
+% \item For $t = 1:T$:
+% \begin{enumerate}
+% \item Let $i$ be such that $\theta_{t-1} = \theta^{(i)}$, draw a candidate state $\tilde{\theta}$ from $q_i$,  
+% \item Let $j$ be such that $\tilde{\theta} = \theta^{(j)}$, compute: $$\alpha_{ij} = \min\left\{ 1, \frac{\pi_j q_{ji}}{\pi_i q_{ij}} \right\}$$
+% \item Draw: 
+% $$\theta_t = \begin{cases}  \tilde{\theta} & \mbox{w.p. } \alpha_{ij} \\  \theta_{t-1} & \mbox{w.p. }  1 - \alpha_{ij} \end{cases} $$
+% \end{enumerate}
+% \end{enumerate}
+
+% \end{frame}
+
+
+\begin{frame}[c]\frametitle{Go over example}
+    
+
+
+\end{frame}
+
+
+\begin{frame}[c]\frametitle{Relationship to ``Simulated Annealing''}
+\framesubtitle{and other stochastic optimization routines}    
+
+A non-gradient iterative optimization routine. 
+
+\begin{enumerate}
+  \item Perturb one element of parameter vector.
+  \item Replace if 
+  \begin{itemize}
+     \item The objective function improves or
+     \item The objective function worsens but ``not by too much'' according to a ``Metropolis'' criteria
+     $$ exp((Q_N(\theta^*_s) - Q_N(\hat{\theta}^*_s))/T_s) > u$$
+     where $s$ is the iterative time, $u$ is a unit uniform draw, and $T_s$ the \emph{temperature}.
+   \end{itemize} 
+\end{enumerate}
+
+\Skip
+Downhill moves are accepted with a probability that decreases over time. 
+
+\Skip
+User chooses step size that governs perturbation and the temperature function. 
+
+\Skip
+Also see Chernozhukov and Hong, ``An MCMC approach to classical estimation'', \emph{J. of Econometrics}, 2003. 
+
+\end{frame}
+
+
+
+
 \end{document}
 
