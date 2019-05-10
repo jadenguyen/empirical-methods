@@ -30,11 +30,11 @@ The goal is to provide an overview of a number of topics in Microeconometrics in
 	- Differentiation, Integration
 6. Multinomial Discrete Choice
 	- Logit, Nested Logit, Mixed Logit
-7. Dynamic Discrete Choice
-	- Rust Models (NFXP), Hotz+Miller (CCP)
-8. Partial Identificaton
+7. Bayesian Methods
+	- Gibbs Sampling
+	- Data augmentation
+	- Metropolis-Hastings
+8. Partial Identificaton (if time permits)
 
 Repo material likely not covered: 
 - Duration Models
-- Bayesian Methods
-	- Empirical Bayes, MCMC, James-Stein
