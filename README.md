@@ -1,12 +1,12 @@
 ## Empirical Methods for Applied Micro
 
-This is a PhD level course in applied econometrics and computational economics, targeted at students conducting applied research (as opposed to econometricians).
+This is a PhD level course in applied econometrics and computational economics, targeted at students conducting applied research (as opposed to econometricians), taught by Rich Sweeney and Charlie Murry.
 
 In addition to traditional econometric approaches, this course draws connections to recent literature on machine learning.
 
 BC students should also checkout the [syllabus](syllabus.md). 
 
-Much of the material was (gratefully) forked from Chris Conlon's [micro-metrics](https://github.com/chrisconlon/micro-metrics) repo. 
+Much of the material was (gratefully) forked from Chris Conlon's [micro-metrics](https://github.com/chrisconlon/micro-metrics) repo and other material is based of a PhD course Charlie used to co-teach with Paul Grieco and Mark Roberts at Penn State. 
 
 It is based on some combination of 
 - [Microeconometrics by Cameron and Trivedi](https://www.amazon.com/Microeconometrics-Methods-Applications-Colin-Cameron/dp/0521848059)
