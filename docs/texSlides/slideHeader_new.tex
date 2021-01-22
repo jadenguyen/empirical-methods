@@ -1,0 +1,114 @@
+%CHANGES
+% switched to Hannover
+
+%\documentclass[11pt,handout,xcolor=pdftex,dvipsnames,table,t]{beamer}
+\documentclass[10pt,english,t]{beamer}
+
+\usefonttheme[onlymath]{serif}
+
+%\usetheme{default}
+\usetheme{Hannover}
+%\usepackage{times}
+%\usefonttheme{structurebold}
+
+\usepackage[english]{babel}
+\usepackage{amsmath}
+\usepackage{pgf,pgfarrows,pgfnodes,pgfautomata,pgfheaps}
+\usepackage{amsmath,amssymb,setspace}
+\usepackage[latin1]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{relsize}
+\usepackage{comment} % end and begin comment
+\usepackage{hyperref} %% creates hyperlinks w dif color
+\hypersetup{urlcolor=blue, linkcolor=blue}
+
+
+\usepackage[absolute,overlay]{textpos} 
+\newenvironment{reference}[2]{% 
+  \begin{textblock*}{\textwidth}(#1,#2) 
+      \footnotesize\it\bgroup\color{red!50!black}}{\egroup\end{textblock*}} 
+
+\DeclareMathSizes{10}{10}{6}{6} 
+
+\usepackage{xcolor}
+\definecolor{mymathcol}{rgb}{0.0, 0.28, 0.67}
+\setbeamercolor{math text}{fg=mymathcol}
+\setbeamercolor{math text displayed}{fg=mymathcol}
+\setbeamertemplate{itemize items}[ball] %makes circles for enumerate
+\setbeamertemplate{frametitle}[default][center] %centers title
+
+
+% COMMON TITLE FORMATTING
+\author{Prof. Richard Sweeney}
+\institute{ECON3391.01, Boston College}
+\date{}
+
+% CREATE FOOTER
+
+\setbeamertemplate{footline}[frame number]
+
+\makeatletter
+\setbeamertemplate{footline}
+{
+    \leavevmode%
+    \hbox{%
+        \begin{beamercolorbox}[wd=.333333\paperwidth,ht=2.25ex,dp=1ex,left]{author in head/foot}%
+            \usebeamerfont{author in head/foot}\hspace*{2ex}  Sweeney
+        \end{beamercolorbox}%
+        \begin{beamercolorbox}[wd=.333333\paperwidth,ht=2.25ex,dp=1ex,center]{title in head/foot}%
+            \usebeamerfont{title in head/foot}Econ 3391
+        \end{beamercolorbox}%
+        \begin{beamercolorbox}[wd=.333333\paperwidth,ht=2.25ex,dp=1ex,right]{date in head/foot}%
+            \usebeamerfont{date in head/foot}
+            \insertframenumber{}/\inserttotalframenumber\hspace*{2ex} 
+        \end{beamercolorbox}}%
+        \vskip0pt%
+}
+
+% SLIDE FORMATTING STUFF 
+\setbeamertemplate{navigation symbols}{}
+\setbeamertemplate{footline}[frame number]
+\addtobeamertemplate{frametitle}{\vspace*{-.20cm}}{\vspace*{0.1cm}}
+
+%% spaces out items to fill vertically
+\renewcommand<>{\item}
+{\beameroriginal\item\vspace{\stretch{.1}}}
+\setlength{\parskip}{\stretch{.1}}%
+%this is if you want fixed spaces
+%{\beameroriginal\item\vspace{\baselineskip}}
+%\setlength{\parskip}{\baselineskip}%
+
+%set font sizes of lists. default shrinks subitems
+\setbeamertemplate{itemize/enumerate body begin}{\normalsize}
+\setbeamertemplate{itemize/enumerate subbody begin}{\normalsize}
+\addtobeamertemplate{frametitle}{\vspace*{0cm}}{\vspace*{0.2cm}}
+%\setlength\topsep{-5px}%NEW
+%        \setlength\partopsep{-0.2cm}%NEW
+%        \setlength\itemsep{-0.2cm}%NEW
+
+
+%define optimal text box
+\usepackage{xkeyval}
+
+\define@boolkey{Gin}{widegroup}[true]{%
+ \setkeys{Gin}{width=\ifdim 			0.95\Gin@nat@width>\linewidth
+  \linewidth
+\else
+  0.95\Gin@nat@width
+\fi}
+}
+
+\setkeys{Gin}{width=0.95\textwidth,height=0.95\textheight,keepaspectratio}
+
+\makeatother
+
+%appendix
+\usepackage{appendixnumberbeamer}
+\setcounter{tocdepth}{1}
+
+% use circles in itemize
+\AtBeginDocument{
+  \def\labelitemii{\(\circ\)}
+}
+
+\makeatother

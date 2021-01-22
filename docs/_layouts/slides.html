@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="{{ page.lang | default: site.lang | default: "en" }}">
+
+  {%- include head.html -%}
+
+  <body>
+
+    {%- include header.html -%}
+
+    <main class="page-content" aria-label="Content">
+      <div class="wrapper">
+        {{ content | 
+            replace: "<!-- slide -->", "<hr />" |
+            replace: "<!-- slide vertical=true -->", "<hr style='border-top: dashed 1px;' />" |
+            remove: "my-style.less"
+        }}
+      </div>
+    </main>
+
+    <main class="page-content" aria-label="Readings">
+        <div class="wrapper">
+            <h2>Required Readings</h2>
+            <!-- SETUP WITH NO LINKS 
+            <ul>
+                {% for item in page.requiredReadings %}
+                  <li>{{ item.name }}</li>
+                {% endfor %}
+            </ul>
+            -->
+            <!-- SETUP WITH LINKS -->
+            {% for item in page.requiredReadings %}
+                {{ item.name }}
+                {%- if item.link -%}
+                <a href="{{item.link}}"> [link] </a>
+                {%- endif -%}   
+                <br>
+            {% endfor %}     
+
+        </div>
+    </main>
+
+    {%- include footer.html -%}
+
+  </body>
+
+</html>

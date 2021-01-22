@@ -1,0 +1,37 @@
+ghpurl: http://www.richard-sweeney.com/empirical-methods # for when you want full link to show up (ie in syllabus)
+baseurl: /empirical-methods
+theme: minima
+title: Empirical Methods
+header_pages: # this is what appears in the header
+  - index.md 
+  - admin/syllabus.md
+  - admin/resources.md
+
+author: Richard L. Sweeney
+email: sweeneri@bc.edu
+description: > # this means to ignore newlines until "twitter_username:"
+  Empirical Methods for Applied Micro PhD Students
+
+collections:
+  lectures:
+    output: true
+  modules:
+    output: true
+
+defaults:
+  - scope:
+      type: modules
+    values:
+      layout: slides
+      requiredReadings: None
+      additionalReadings: None
+      keyPoints: 
+      weight: 100 # 1 shows up first, only way i could figure out how to order outline
+      texslides: false  
+      mdslides: false  
+      externalLink: false
+
+      
+port: 4001
+
+markdown: kramdown

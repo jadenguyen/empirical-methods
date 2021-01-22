@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="{{ page.lang | default: site.lang | default: "en" }}">
+
+  {%- include head.html -%}
+
+  <body>
+
+    {%- include header.html -%}
+
+    <main class="page-content" aria-label="Lecture Items">
+      <div class="wrapper">
+        <h2>{{page.title}}</h2>
+
+        {% assign filename = page.path | replace_first: '_lectures/', '' | replace: '/', '-'  | replace: '.md', '' %}
+<!--https://github.com/jekyll/jekyll/issues/633-->
+        <h3>
+          {%- if page.texslides == true -%}    
+            <a href="{{ site.baseurl }}/texSlides/{{filename}}/{{filename}}.pdf"> Slides (.pdf) </a>
+            <br>
+          {%- endif -%}
+          
+          {%- if page.mdslides == true -%}    
+          <a href="{{ site.baseurl }}/slides/{{filename}}"> Slides </a>
+          <br>  
+          <a href="{{ site.baseurl }}/mdSlides/{{filename}}"> Markdown </a>
+        {%- endif -%}    
+        </h3> 
+        
+          <h3>Key Points</h3>
+          <!-- SETUP WITH LINKS -->
+          <ul>
+            {% for item in page.keyPoints %}
+            <li>{{ item }}</li>{% endfor %}
+          </ul>
+
+          <h3>Required Readings</h3>
+          <!-- SETUP WITH LINKS -->
+          {% for item in page.requiredReadings %}
+              {{ item.name }}
+              {%- if item.link -%}
+              <a href="{{item.link}}"> [link] </a>
+              {%- endif -%}   
+              <br>
+          {% endfor %}     
+          <br>
+          <h3>Additional Readings</h3>
+          <!-- SETUP WITH LINKS -->
+          {% for item in page.additionalReadings %}
+              {{ item.name }}
+              {%- if item.link -%}
+              <a href="{{item.link}}"> [link] </a>
+              {%- endif -%}   
+              <br>
+          {% endfor %}  
+        </div>
+      
+    {%- include footer.html -%}
+
+  </body>
+
+</html>

@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="{{ page.lang | default: site.lang | default: "en" }}">
+
+  {%- include head.html -%}
+
+  <body>
+
+    {%- include header.html -%}
+
+    <main class="page-content" aria-label="Lecture Items">
+      <div class="wrapper">
+        <h2>{{page.title}}</h2>
+
+        {% assign filename = page.path | replace_first: '_lectures/', '' | replace: '/', '-'  | replace: '.md', '' %}
+<!--https://github.com/jekyll/jekyll/issues/633-->
+        
+<!--        <h3>Slides</h3> -->
+          <!-- SETUP WITH LINKS -->
+          {% for item in page.slideLinks %}
+              {{ item.name }}
+              {%- if item.externalLink == true -%}
+                <a href="{{item.link}}"> [link] </a>
+              {%- else -%}
+                <a href="{{ site.baseurl }}/{{item.link}}"> [link] </a>
+              {%- endif -%}   
+              <br>
+          {% endfor %}     
+        <br>
+
+          <b>Key Points</b>
+          <!-- SETUP WITH LINKS -->
+          <ul>
+            {% for item in page.keyPoints %}
+            <li>{{ item }}</li>{% endfor %}
+          </ul>
+
+          {{ content }}
+        </div>
+
+    {%- include footer.html -%}
+
+  </body>
+
+</html>

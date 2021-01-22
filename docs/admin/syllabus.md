@@ -1,7 +1,9 @@
-# ECON8855 - Spring 2019
+---
+title: "Syllabus"
+---
 
-## Empirical Methods for Applied Micro
-
+Economics of Energy and the Environment    
+BC Econ 8855 - Spring 2021 
 
 - **Instructors:** murryc@bc.edu and sweeneri@bc.edu
 - **Office Hours:** TBD
