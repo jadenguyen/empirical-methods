@@ -1,5 +1,5 @@
 ---
-title: Intro / Computer stuff
+title: Nonparametrics
 layout: modules
 texslides: true
 
